@@ -13,13 +13,15 @@ triggers:
 
 # ⭐ 内娱.skill 工坊
 
-> 这鱼这鱼可以，那鱼不行。那鱼为什么不行？那鱼完了。
+> 这鱼，这鱼可以，那鱼不行。那鱼为什么不行？那鱼完了。
 
 ---
 
 ## 是什么
 
 内娱.skill 是一个**数字人格创建工坊**，将喜欢的歌手/明星转化为可对话的 AI Skill。
+
+参照 [colleague-skill](https://github.com/titanwings/colleague-skill)（by titanwings）架构，专注文娱场景：
 
 | 跑路了 | 用哪个 |
 |--------|--------|
@@ -40,6 +42,34 @@ git clone https://github.com/yanghaoraneve/star-skill ~/.openclaw/workspace/skil
 
 ---
 
+## 目录结构
+
+```
+star-skill/
+├── SKILL.md              # 工坊入口
+├── README.md             # 使用文档
+│
+├── prompts/              # Prompt 模板
+│   ├── intake.md             # 信息录入向导
+│   ├── persona_builder.md     # Persona 5层生成
+│   ├── meta_builder.md        # meta.json 生成
+│   ├── knowledge_router.md    # 知识库路由配置
+│   └── correction_handler.md  # 纠正处理
+│
+├── tools/                # Python 工具
+│   ├── lyrics_fetcher.py      # 歌词采集（网易云）
+│   ├── bilibili_fetcher.py    # B站数据采集
+│   ├── weibo_fetcher.py       # 微博采集
+│   ├── knowledge_builder.py    # 知识库构建
+│   ├── skill_generator.py     # Skill 文件生成
+│   └── version_manager.py      # 版本管理
+│
+└── docs/
+    └── PRC.md           # 项目需求文档
+```
+
+---
+
 ## 命令参考
 
 | 命令 | 说明 |
@@ -49,21 +79,4 @@ git clone https://github.com/yanghaoraneve/star-skill ~/.openclaw/workspace/skil
 | `/{slug}` | 调用完整人格 |
 | `/star-rollback {slug} {version}` | 回滚版本 |
 
----
-
-## 生成产物
-
-```
-{slug}/
-├── SKILL.md
-├── meta.json
-├── persona/persona.md     # 5层人格档案
-└── knowledge/
-    ├── lyrics/            # 歌词文件
-    ├── song_list_full.json
-    ├── weibo_posts_full.json
-    ├── video_details.json
-    └── comments.json
-```
-
-详见 [README.md](README.md) · [docs/PRC.md](docs/PRC.md)
+详见 [README.md](README.md)
