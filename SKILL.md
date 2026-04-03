@@ -11,7 +11,17 @@ triggers:
   - /star-wizard
 ---
 
+<div align="center">
+
 # ⭐ 内娱.skill 工坊
+
+> 这鱼，这鱼可以，那鱼不行。那鱼为什么不行？那鱼完了。
+
+**将喜欢的歌手/明星转化为可对话的 AI 数字分身**
+
+[详细说明](README.md) · [创建向导](prompts/intake.md)
+
+</div>
 
 > 这鱼，这鱼可以，那鱼不行。那鱼为什么不行？那鱼完了。
 
