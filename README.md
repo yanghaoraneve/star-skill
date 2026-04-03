@@ -48,7 +48,7 @@
 
 ---
 
-## 安装
+## 安装 推荐使用OpenClaw
 
 ```bash
 git clone https://github.com/yanghaoraneve/star-skill ~/.openclaw/workspace/skills/create-star
