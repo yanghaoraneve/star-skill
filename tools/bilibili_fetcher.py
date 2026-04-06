@@ -45,7 +45,7 @@ def fetch_videos(mid: str, limit: int = 20) -> list:
                     "desc": v["description"],
                     "play_count": v["play"],
                     "comment_count": v["comment"],
-                    "pubdate": time.strftime("%Y-%m-%d", time.localtime(v["pubdate"]))
+                    "pubdate": time.strftime("%Y-%m-%d", time.localtime(v.get("pubdate", 0)))
                 })
                 if limit > 0 and len(videos) >= limit:
                     break
@@ -78,7 +78,7 @@ def fetch_video_detail(bvid: str) -> dict:
                 "share_count": d["stat"]["share"],
                 "comment_count": d["stat"]["reply"],
                 "duration": d["duration"],
-                "pubdate": time.strftime("%Y-%m-%d", time.localtime(d["pubdate"]))
+                "pubdate": time.strftime("%Y-%m-%d", time.localtime(d.get("pubdate", 0)))
             }
     except Exception as e:
         print(f"[WARN] 获取视频详情失败 {bvid}: {e}")
@@ -105,7 +105,7 @@ def fetch_comments(bvid: str, limit: int = 20) -> list:
                     "text": r["content"]["message"],
                     "author": r["member"]["uname"],
                     "like_count": r["like"],
-                    "ctime": time.strftime("%Y-%m-%d", time.localtime(r["ctime"]))
+                    "ctime": time.strftime("%Y-%m-%d", time.localtime(r.get("ctime", 0)))
                 })
                 if len(comments) >= limit:
                     break

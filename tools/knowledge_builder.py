@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 # ========== 配置 ==========
-SUPPORTED_FIELDS = ["lyrics", "weibo", "bilibili", "manual"]
+SUPPORTED_FIELDS = ["lyrics", "weibo", "bilibili", "role_script", "manual"]
 
 
 def build_song_list(lyrics_dir: Path, output: Path):
@@ -49,6 +49,12 @@ def build_knowledge_index(knowledge_dir: Path, output: Path):
             "comments": 0,
             "video_file": "video_details.json",
             "comment_file": "comments.json"
+        },
+        "role_script": {
+            "scripts": 0,
+            "total_lines": 0,
+            "index_file": "role_scripts_index.json",
+            "detail_file": "role_scripts_full.json"
         }
     }
 
@@ -70,6 +76,13 @@ def build_knowledge_index(knowledge_dir: Path, output: Path):
             comments = json.load(f)
             index["bilibili"]["comments"] = len(comments)
 
+    role_index_file = knowledge_dir / "role_scripts_index.json"
+    if role_index_file.exists():
+        with open(role_index_file, 'r', encoding='utf-8') as f:
+            role_index = json.load(f)
+            index["role_script"]["scripts"] = role_index.get("total_scripts", 0)
+            index["role_script"]["total_lines"] = role_index.get("total_lines", 0)
+
     with open(output, 'w', encoding='utf-8') as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
     print(f"[完成] 知识库索引 → {output}")
@@ -77,6 +90,7 @@ def build_knowledge_index(knowledge_dir: Path, output: Path):
     print(f"  - 微博: {index['weibo']['count']} 条")
     print(f"  - B站视频: {index['bilibili']['videos']} 个")
     print(f"  - B站评论: {index['bilibili']['comments']} 条")
+    print(f"  - 角色台词: {index['role_script']['scripts']} 个角色，{index['role_script']['total_lines']} 条台词")
 
 
 def main():

@@ -70,6 +70,7 @@ star-skill/
 │   ├── lyrics_fetcher.py      # 歌词采集（网易云）
 │   ├── bilibili_fetcher.py    # B站数据采集
 │   ├── weibo_fetcher.py       # 微博采集
+│   ├── role_script_builder.py # 角色台词本构建
 │   ├── knowledge_builder.py    # 知识库构建
 │   ├── skill_generator.py     # Skill 文件生成
 │   └── version_manager.py      # 版本管理

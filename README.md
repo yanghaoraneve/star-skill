@@ -42,6 +42,7 @@
 | 网易云音乐 | 歌词（按歌曲ID抓取，支持50首+） | `lyrics_fetcher.py --artist-id` | 接口需登录态认证 |
 | B站 | 视频详情 + 评论（标题/播放量/弹幕关键词） | `bilibili_fetcher.py --uid` | 接口需 wbi 签名 |
 | 微博 | 动态正文 + 评论（话题/hashtag/互动数据） | `weibo_fetcher.py --uid` | 依赖 weibo-cli |
+| **角色台词本** | **演员角色经典台词、场景情绪、句式风格** | `role_script_builder.py` 或手动上传 `{作品名}_{角色名}台词本.txt` | **支持演员类人格，可分析多角色差异** |
 | 手动上传 | JSON / TXT / 截图 / 粘贴文字 | — | 完全可用，推荐补充 |
 
 > ⚠️ 平台自动采集依赖外部服务稳定性，建议手动上传作为保底。
@@ -151,6 +152,7 @@ star/
 │   ├── lyrics_fetcher.py      # 歌词采集
 │   ├── bilibili_fetcher.py    # B站采集
 │   ├── weibo_fetcher.py       # 微博采集
+│   ├── role_script_builder.py # 角色台词本构建
 │   ├── knowledge_builder.py    # 知识库构建
 │   ├── skill_generator.py     # Skill 生成
 │   └── version_manager.py      # 版本管理

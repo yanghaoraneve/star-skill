@@ -14,7 +14,7 @@ import urllib.parse
 from pathlib import Path
 
 # ========== 配置 ==========
-NETEASE_API = "https://music.163.com/api/artists/{artist_id}/songs"
+NETEASE_API = "https://music.163.com/api/artist/{artist_id}"
 SONG_DETAIL_API = "https://music.163.com/api/v1/resource/comments/R_SO_4_{song_id}?limit=1&offset=0"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; StarSkill/1.0)",

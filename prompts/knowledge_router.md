@@ -37,6 +37,12 @@
   "works": {
     "query_patterns": ["代表作", "专辑", "作品", "歌单", "热门歌曲"],
     "file": "knowledge/song_list_full.json"
+  },
+  "role_script": {
+    "query_patterns": ["角色", "台词", "小兰花", "凌妙妙", "初礼", "《", "演的", "演戏", "角色名", "哪句"],
+    "index_file": "knowledge/role_scripts_index.json",
+    "detail_file": "knowledge/role_scripts_full.json",
+    "format": "JSON数组，每个角色含 drama_name/role_name/total_quotes/scenes"
   }
 }
 ```
@@ -64,6 +70,18 @@ cat meta.json
 
 # 全局歌词搜索
 grep -l "{关键词}" knowledge/lyrics/*.txt
+
+# 问角色台词本索引
+cat knowledge/role_scripts_index.json
+
+# 问某角色台词（先查索引找文件名）
+cat knowledge/role_scripts_full.json | jq '.[] | select(role_name=="小兰花")'
+
+# 按作品名查
+cat knowledge/role_scripts_full.json | jq '.[] | select(drama_name=="苍兰诀")'
+
+# 搜索含有关键词的台词
+grep "{关键词}" knowledge/*台词本*.txt
 ```
 
 ---
@@ -90,6 +108,21 @@ grep -l "{关键词}" knowledge/lyrics/*.txt
 《{歌1}》应该大家都知道吧？
 {一句话特点}
 还有《{歌2}》也很多人喜欢～」
+```
+
+### 角色台词类
+```
+「《{作品名}》里演{角色名}的时候啊…」
+「那场戏她说的话我超喜欢！」
+「「{经典台词}」——就这句！
+就是那种{角色情绪}的感觉对吧～」
+```
+
+### 角色横向对比类
+```
+「{角色A}和{角色B}说话风格差挺多的…
+{角色A}更偏{特征}，而{角色B}是{特征}
+虽然都是她演的，但感觉完全不一样诶！」
 ```
 
 ---
@@ -146,4 +179,43 @@ grep -l "{关键词}" knowledge/lyrics/*.txt
     "video_bvid": "BVxxx"
   }
 ]
+```
+
+### role_scripts_index.json
+```json
+{
+  "total_scripts": 3,
+  "total_lines": 284,
+  "scripts": [
+    {
+      "drama_name": "苍兰诀",
+      "role_name": "小兰花",
+      "total_quotes": 156,
+      "file": "苍兰诀_小兰花台词本.txt"
+    }
+  ]
+}
+```
+
+### role_scripts_full.json（单个角色结构）
+```json
+{
+  "drama_name": "苍兰诀",
+  "role_name": "小兰花",
+  "total_quotes": 156,
+  "scenes": [
+    {
+      "header": "第一集·司命殿",
+      "quotes": ["「我不是芍药，不是月季，我是司命殿小兰花...」"],
+      "count": 12
+    }
+  ],
+  "all_quotes": ["台词1", "台词2", ...],
+  "analysis": {
+    "total_lines": 156,
+    "avg_line_length": 28.5,
+    "exclamation_ratio": 0.35,
+    "emotion_distribution": {"开心": 42, "害羞": 28, "傲娇": 15}
+  }
+}
 ```
